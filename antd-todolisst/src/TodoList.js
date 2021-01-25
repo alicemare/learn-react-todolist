@@ -14,6 +14,7 @@ class TodoList extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleStateChange = this.handleStateChange.bind(this);
         this.handleBtnClick = this.handleBtnClick.bind(this);
+        //this.handleItemDel = this.handleItemDel.bind(this);
         store.subscribe(this.handleStateChange);
     }
     
@@ -38,8 +39,12 @@ class TodoList extends Component {
             style={{marginTop:'10px',width:'300px'}}
             bordered
             dataSource={this.state.list}
-            renderItem={item =>(
-                <List.Item>{item}</List.Item>
+            renderItem={(item,index) =>(
+                <div>
+                    <List.Item onClick={this.handleItemDel.bind(this, index)}
+
+                    >{item}</List.Item>
+                </div>
             )}
         
         />
@@ -66,7 +71,15 @@ class TodoList extends Component {
 
         }
         store.dispatch(action);
-        this.setState()
+        
+    }
+    
+    handleItemDel(index){
+        const action = {
+            type: 'del_todo_item',
+            index: index    
+        }
+        store.dispatch(action);
     }
 }
 

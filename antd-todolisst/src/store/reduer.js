@@ -21,6 +21,13 @@ export default (state = defaultState, action) => {
         //console.log(newState)
         return newState;
     }
+    if(action.type === 'del_todo_item'){
+        const newState = JSON.parse(JSON.stringify(state));
+        newState.list.splice(action.index, 1);
+        return newState;
+    }
+        
+    
 
     //console.log(state,action);
     //state 整个仓库存储数据
